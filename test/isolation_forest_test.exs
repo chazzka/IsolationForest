@@ -35,9 +35,13 @@ defmodule IsolationForestTest do
     :rand.seed(:exsss, {56,151,130})
     ranges = [%{"s"=>1, "e"=>6}, %{"s"=>6, "e"=>7}]
     assert IsolationForest.left_right([[1,2],[3,4],[5,6]],0,2,ranges) == {
-     %{"data" => [[3, 4]], "dim" => 0, "range" => [%{"e" => 3.5, "s" => 1}, %{"e" => 7, "s" => 6}]},
-     %{"data" => [[1, 2], [5, 6]], "dim" => 1, "range" => [%{"e" => 6, "s" => 3.5}, %{"e" => 7, "s" => 6}]}
+     %{"data" => [[5,6]], "dim" => 0, "ranges" => [%{"e" => 3.5, "s" => 1}, %{"e" => 7, "s" => 6}], "left" => %{}, "right" => %{}},
+     %{"data" => [[1,2],[3,4]], "dim" => 1, "ranges" => [%{"e" => 6, "s" => 3.5}, %{"e" => 7, "s" => 6}], "left" => %{}, "right" => %{}}
     }
+  end
+
+  test "init tree" do
+    assert IsolationForest.init_tree([[1,2],[1.5,2.5],[3.1,4.2],[3,4],[5,6]], [%{"e" => 6, "s" => 1}, %{"e" => 7, "s" => 2}], 2) == 2
   end
   
 end
